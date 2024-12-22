@@ -27,10 +27,22 @@ export const posts = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
+);
+
+export const images = createTable(
+  "image",
+  {
+    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    url: varchar("url", { length: 500 }),
+    name: varchar("name", { length: 500 }).notNull(),
+  },
+  (example) => ({
+    nameIndex: index("name_idx").on(example.name),
+  }),
 );
