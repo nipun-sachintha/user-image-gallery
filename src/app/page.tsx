@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { db } from "~/server/db";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const posts = await db.query.posts.findMany();
   console.log(posts);
